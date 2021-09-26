@@ -1,7 +1,8 @@
+# primeira parte
+# próxima parte = adicionar histórico em dicionários ou tuplas
+
+
 import random
-
-
-
 
 class Ambiente: # ambiente
                                # parâmetros iniciais
@@ -31,7 +32,7 @@ class Ambiente: # ambiente
     def acao(self):
         pass
 
-    def gasto_semanal(self):              # calcula quanto foi gasto de papel higiênico
+    def gasto_semanal___(self):              # calcula quanto foi gasto de papel higiênico
         self.gasto_semanal = random.randint(self.cons_min, self.cons_max)
         self.estoque -= self.gasto_semanal
         return self.gasto_semanal
@@ -81,7 +82,7 @@ while (retornar != "n"):     # loop para começar tudo de novo
     while (semana != "s"):
         semana = input("*** Simular o gasto da semana? *** s/n: ")
         if semana == "s" :
-            g = amb.gasto_semanal()
+            g = amb.gasto_semanal___()
             e = amb.estoque
             print("Rolos gastos na semana:", g, "\nEm estoque:", e)
 
@@ -99,20 +100,23 @@ while (retornar != "n"):     # loop para começar tudo de novo
                 print("Estava muito caro! -- Comprei apenas o suficiente")
 
             if p <= 1.0:  # está barato
-                print("Tava barato demais!!! - comprei bastante pra completar o estoque!")
+                print("Tava barato demais!!! - comprei bastante para completar o estoque!")
+        # ----------- While de retorno ----------------------------------------------
+        # loop para retornar ou terminar
+        retornar = input("Deseja simular outra semana?>>>>>> s/n: ")  # volta ao início
+
+        if retornar == "s":
+            pass
+        if retornar == "n":
+            pass
+        #-------------------------------------------------------------------------
+
+
 
         if compra == "n" :
             pass
 
 
-# loop para retornar ou terminar
-retornar = input("Deseja simular outra semana? s/n: ")         # volta ao início
-
-
-if retornar == "s" :
-    pass
-if retornar == "n" :
-    pass
 
 
 
