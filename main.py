@@ -45,13 +45,17 @@ class Agente():
         pass
 
     def comprar(self,x,y):            # CRENÇA se está barato completa o estoque
+
         if x > 1.0:  # está caro             # CRENÇA se está caro, compra só o mínimo para não faltar
-            self.z = 8 - y  # completa o estoque só até 8 unidades (consumo máximo)
+            z = 8 - y  # completa o estoque só até 8 unidades (consumo máximo) -- se for negativo passa z pra 0
 
         if x <= 1.0:  # está barato
-            self.z = 12 - y  # completa o estoque só até 12 unidades
+            z = 12 - y  # completa o estoque só até 12 unidades
 
-            return self.z
+        if z < 0:
+            z = 0
+
+        return z
 
 
     # recebe percepções do corpo
@@ -59,7 +63,7 @@ class Agente():
     # envia comando ao corpo
 
         #    estoque, cons_min cons_max cons_med preço_min preço_max preço_med
-amb = Ambiente(12,        2,        8,       5,     0.6,       1.0,     1.4)     # criando objeto Ambiente e definindo parâmetros
+amb = Ambiente(12,        2,        8,       5,     0.6,       1.4,     1.0)     # criando objeto Ambiente e definindo parâmetros
 
 agt = Agente()                                # criando objeto agente
 
@@ -90,17 +94,20 @@ while (retornar != "n"):     # loop para começar tudo de novo
             pass
 
 
-    compra = " "                         # robô faz a compra para abastecer o estoque
-    while (compra != "s"):
-        compra = input("Deseja que o robô faça as compras? s/n: ")
-        if compra == "s" :
+    comprar__ = " "                         # robô faz a compra para abastecer o estoque
+    while (comprar__ != "s"):
+        comprar__ = input("Deseja que o robô faça as compras? s/n: ")
+        if comprar__ == "s" :
             p = amb.preco_atual()
-            amb.estoque_atual(agt.comprar(p, amb.estoque))
+            print(">> Preço >>>> " + str(p))
+            print(">> Estoque >>> " + str(amb.estoque))
+            compra = agt.comprar(p, amb.estoque)
+            e = amb.estoque_atual(compra)
             if p > 1.0:  # está caro
-                print("Estava muito caro! -- Comprei apenas o suficiente")
+                print("Estava muito caro! -- Comprei apenas o suficiente. Temos agora: " + str(e) + " unidades")
 
             if p <= 1.0:  # está barato
-                print("Tava barato demais!!! - comprei bastante para completar o estoque!")
+                print("Tava barato demais!!! - comprei bastante para completar o estoque! Temos agora: " + str(e) + " unidades")
         # ----------- While de retorno ----------------------------------------------
         # loop para retornar ou terminar
         retornar = input("Deseja simular outra semana?>>>>>> s/n: ")  # volta ao início
@@ -113,10 +120,6 @@ while (retornar != "n"):     # loop para começar tudo de novo
 
 
 
-        if compra == "n" :
+        if comprar__ == "n" :
             pass
-
-
-
-
 
