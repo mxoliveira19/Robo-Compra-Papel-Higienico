@@ -1,5 +1,5 @@
 # Robô comprador de Papel Higiênico
-# acrescentada flexibilidade: compra depende do preço. 
+# acrescentada flexibilidade: compra depende do preço.
 # Mas se houver festa, viagem ou isitas ele comprada outras quantidades para se adequar
 
 import tkinter as tkr
@@ -77,7 +77,7 @@ class Agente():
             self.visita_ = True
         else:
             self.visita_ = False
-        print(x)
+
 
         return self.visita_
 
@@ -88,7 +88,7 @@ class Agente():
         else:
             self.festa_ = False
 
-        print(x)
+
 
         return self.festa_
 
@@ -99,7 +99,7 @@ class Agente():
         else:
             self.viagem_ = False
 
-        print(x)
+
 
         return self.viagem_
 
@@ -392,3 +392,12 @@ lb7.place(x=130, y=340)
 
 tkr.mainloop()
 
+
+
+#--------------------------------------------------------------------------------
+#média gasto e preço 2 casas decimais
+#se passaram tantas semanas
+#plot
+#situações de exceção: visitas etc... mudar comportamento
+#mudar comportamento (estratégia) e aumentar estoque até um limite  - dependndo das médias e de outras situações
+# deixar claro onde está a crença
