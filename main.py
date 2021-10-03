@@ -3,6 +3,7 @@
 # Mas se houver festa, viagem ou isitas ele comprada outras quantidades para se adequar
 # acrescentada memoria dos gastos e do preço
 #acrescentado memória da média de gastos e da média de preço
+# se a média estiver alta compra um pouco a mais
 
 import tkinter as tkr
 from tkinter import *
@@ -63,6 +64,7 @@ class Agente():
         self.med_gast  = [1]
         self.med_prec  = [1]
         self.marcador_compra = 0
+        self.marcador_media_gasto_alta = False
 
 
     def media_gastos__(self):  # media dos gastos de todas as semanas
@@ -131,6 +133,14 @@ class Agente():
         if self.festa_ == True and self.visita_ == True: # se houver festa e visita compra o máximo, independente do preço
             z = 12 - y
             self.marcador_compra = 6
+
+        if self.media_gasto >= 5.6:
+            self.marcador_media_gasto_alta = True
+            z = z + 1
+
+            if self.media_gasto < 5.6:
+                self.marcador_media_gasto_alta = False
+                z = z + 1
 
 
 
@@ -337,7 +347,13 @@ def bt_click():
             lb5["text"] = " Comprei bastante para completar o estoque! Temos agora: " + str(
                 e) + " unidades"
 
-        lb6["text"] = "<<<<<--->>>>>"
+        if agt.marcador_media_gasto_alta == True:
+            lb6["text"] = "Comprei uma unidade a mais pois a média de gastos está um pouco alta"
+        else:
+            lb6["text"] = "<<<<<--->>>>>"
+
+
+
         lb7["text"] = "<<<<< Deseja simular outra semana? >>>>> "
 
         agt.media_precos__()
@@ -355,6 +371,9 @@ def bt_click():
         agt.visita()  # avisa se na próxima semana haverá festa, visitas ou viagem
         agt.festa()
         agt.viagem()
+
+        lbmed_gasto["text"] = "Média Gasto: " + str(round(agt.media_gasto, 2))
+        lbmed_preco["text"] = "Média Preço: " + str(round(agt.media_preco, 2))
 
 
 
@@ -391,6 +410,12 @@ lb6.place(x=130, y=320)
 
 lb7 = Label(janela, text="")
 lb7.place(x=130, y=340)
+
+lbmed_gasto = Label(janela, text="")
+lbmed_gasto.place(x=20, y=160)
+
+lbmed_preco = Label(janela, text="")
+lbmed_preco.place(x=20, y=180)
 
 tkr.mainloop()
 
