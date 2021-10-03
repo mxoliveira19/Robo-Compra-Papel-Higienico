@@ -1,6 +1,8 @@
 # Robô comprador de Papel Higiênico
 # acrescentada flexibilidade: compra depende do preço.
 # Mas se houver festa, viagem ou isitas ele comprada outras quantidades para se adequar
+# acrescentada memoria dos gastos e do preço
+#acrescentado memória da média de gastos e da média de preço
 
 import tkinter as tkr
 from tkinter import *
